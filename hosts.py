@@ -16,6 +16,12 @@ TODO: Convert arg parser to use optparse module
 
 """
 
+
+def printHosts():
+	f = open('/etc/hosts', 'r')
+	print f.read()
+	f.close()
+
 def addToHosts(address):
 	#check that this is a valid address/ip, then --
 	#validated, so add it
@@ -56,6 +62,11 @@ def stripWhitespace(file):
 				temp.write(new + '\n')
 	os.rename('/etc/hosts.tmp', '/etc/hosts')
 
+def printUsage():
+	print "Usage:\n-a [address] add address to hosts\n"\
+		"-r [address] remove address from hosts\n-v display "\
+		"hosts file on terminal"
+
 def main():
 	#let's parse command line arguments
 	arguments = sys.argv
@@ -68,10 +79,11 @@ def main():
 		#remove entry from hosts
 		removeFromHosts(arguments[2])
 		stripWhitespace('/etc/hosts')
+	elif arguments[1] == "-v":
+		printHosts()
 	elif arguments[1] == "lol":
 		print "YOU TYPED LOL -- YOU'RE FUNNY!"
 	else:
-		print "Here be dragons... Try again."
-
+		printUsage()
 if __name__=='__main__':
 	main()
