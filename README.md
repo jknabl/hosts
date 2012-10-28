@@ -1,4 +1,4 @@
 hosts
 =====
 
-Quickly and easily edit hosts file via command line python script
+Quickly edit hosts file via command line python script.
